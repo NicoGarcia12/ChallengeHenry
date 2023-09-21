@@ -31,7 +31,6 @@ app.use((req, res, next) => {
   );
   next();
 });
-
 // Importar y utilizar las rutas
 app.use("/", routes);
 
