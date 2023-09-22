@@ -8,6 +8,7 @@ const createUserHelper = async (dataUser) => {
           email: dataUser.userEmail,
           name: dataUser.fullName,
           phone: dataUser.phoneNumber,
+          dateStart: dataUser.startDate,
           language: dataUser.preferredLanguage,
           findUs: dataUser.howFound,
           newsletter: dataUser.newsletterSubscription,
@@ -17,7 +18,6 @@ const createUserHelper = async (dataUser) => {
       return newUser;
     } catch (error) {
       await prisma.$disconnect();
-      throw new Error("Error al crear el usuario");
     }
   };
   

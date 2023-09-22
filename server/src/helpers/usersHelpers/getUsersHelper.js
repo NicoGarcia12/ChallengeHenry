@@ -9,7 +9,6 @@ const getUsersHelper = async () => {
     return users;
   } catch (error) {
     await prisma.$disconnect();
-    throw new Error("Error al intentar traer todos los usuarios");
   }
 };
 

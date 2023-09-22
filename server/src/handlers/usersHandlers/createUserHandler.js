@@ -8,15 +8,16 @@ const createUserHandler = async (req, res) => {
       email,
       full_name,
       phone_number,
+      start_date,
       preferred_language,
       how_found,
       newsletter_subscription,
     } = req.body;
-    console.log("FECHA");
     const dataUser = {
       userEmail: email,
       fullName: full_name,
       phoneNumber: phone_number,
+      startDate:start_date,
       preferredLanguage: preferred_language,
       howFound: how_found,
       newsletterSubscription: newsletter_subscription,

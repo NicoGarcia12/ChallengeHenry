@@ -11,7 +11,6 @@ const deleteUserHelper = async (email) => {
     return;
   } catch (error) {
     await prisma.$disconnect();
-    throw new Error("Error al eliminar el usuario");
   }
 };
 

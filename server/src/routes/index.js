@@ -16,7 +16,7 @@ const {
   deleteUserHandler,
 } = require("../handlers/usersHandlers/deleteUserHandler");
 
-mainRouter.post("/user", createUserHandler); // FALTA LA FECHA
+mainRouter.post("/user", createUserHandler);
 mainRouter.get("/user/:email", getUniqueUserHandler);
 mainRouter.get("/users", getUsersHandler);
 mainRouter.put("/user/:email", updateUserHandler); // FALTA LA FECHA
