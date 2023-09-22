@@ -1,10 +1,10 @@
-// instanciamos el framework express
+// Instanciamos el framework express
 const express = require("express");
 
-// nos ayuda a la interpretación de los datos que llegan por POST, PUT y PATCH
+// Nos ayuda a la interpretación de los datos que llegan por POST, PUT y PATCH
 const bodyParser = require("body-parser");
 
-// nos ayuda a resolver las métricas con la información que nos ofrece, nos sirve para dev y en producción hay que tener cuidado con los datos sensibles
+// Nos ayuda a resolver las métricas con la información que nos ofrece, nos sirve para dev y en producción hay que tener cuidado con los datos sensibles
 const morgan = require("morgan");
 
 // Intanciamos las rutas

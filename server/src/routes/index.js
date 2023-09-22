@@ -12,10 +12,14 @@ const {
 const {
   updateUserHandler,
 } = require("../handlers/usersHandlers/updateUserHandler");
+const {
+  deleteUserHandler,
+} = require("../handlers/usersHandlers/deleteUserHandler");
 
 mainRouter.post("/user", createUserHandler); // FALTA LA FECHA
-mainRouter.get("/user/:email", getUniqueUserHandler); 
+mainRouter.get("/user/:email", getUniqueUserHandler);
 mainRouter.get("/users", getUsersHandler);
-mainRouter.put('/user/:email', updateUserHandler) // FALTA LA FECHA
+mainRouter.put("/user/:email", updateUserHandler); // FALTA LA FECHA
+mainRouter.delete("/user/:email", deleteUserHandler);
 
 module.exports = mainRouter;
