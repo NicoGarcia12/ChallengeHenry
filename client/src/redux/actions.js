@@ -54,3 +54,15 @@ export const deleteUser = (email) => {
     }
   };
 };
+
+export const updateUser = (updatedData,email) => {
+  const endpoint = `/user/${email}`;
+  return async (dispatch) => {
+    try {
+      const response = await axios.put(endpoint, updatedData);
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
+  };
+};

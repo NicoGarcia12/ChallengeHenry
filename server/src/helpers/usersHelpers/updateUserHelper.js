@@ -3,22 +3,22 @@ const prisma = new PrismaClient();
 
 const updateUserHelper = async (dataUser) => {
   try {
+    console.log(dataUser)
     const updatedUser = await prisma.user.update({
-      where: { email: dataUser.email },
+      where: { email: dataUser.userEmail },
       data: {
-        name: dataUser.full_name,
-        phone: dataUser.phone_number,
-        language: dataUser.preferred_language,
-        findUs: dataUser.how_found,
-        newsletter: dataUser.newsletter_subscription,
+        name: dataUser.fullName,
+        phone: dataUser.phoneNumber,
+        dateStart: dataUser.startDate,
+        language: dataUser.preferredLanguage,
+        findUs: dataUser.howFound,
+        newsletter: dataUser.newsletterSubscription,
       },
     });
-
     await prisma.$disconnect();
     return updatedUser;
   } catch (error) {
     await prisma.$disconnect();
-    throw new Error("Error al actualizar el usuario");
   }
 };
 

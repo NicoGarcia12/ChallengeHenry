@@ -19,7 +19,7 @@ const {
 mainRouter.post("/user", createUserHandler);
 mainRouter.get("/user/:email", getUniqueUserHandler);
 mainRouter.get("/users", getUsersHandler);
-mainRouter.put("/user/:email", updateUserHandler); // FALTA LA FECHA
+mainRouter.put("/user/:email", updateUserHandler);
 mainRouter.delete("/user/:email", deleteUserHandler);
 
 module.exports = mainRouter;
