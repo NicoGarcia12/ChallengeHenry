@@ -1,12 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import SearchBar from "../SearchBar/SearchBar"; // Asegúrate de importar tu componente SearchBar
-
+import styles from "./Navbar.module.css"
 function Navbar() {
   return (
     <nav>
-      <div className="navbar-container">
-        <div className="logo">Nombre de la Página</div>
+      <div className={styles.Navbar}>
+        <div>
+          <h1>Henry Challenge</h1>
+        </div>
         <div>
           <Link to="/">
             <button>Home</button>

@@ -1,5 +1,6 @@
+// UserProfile.js
 import React, { useEffect, useState } from "react";
-import "./UserProfile.module.css";
+import styles from "./UserProfile.module.css";
 import { useDispatch } from "react-redux";
 import { searchUserByEmail, updateUser, deleteUser } from "../../redux/actions";
 import { useNavigate, useParams } from "react-router-dom";
@@ -31,7 +32,97 @@ function UserProfile() {
         alert("No se ha encontrado un usuario con ese email");
         navigate("/");
       });
-  }, [dispatch, email]);
+  }, [dispatch, email, navigate]);
+
+  const generateTag = (item) => {
+    switch (item.type) {
+      case "text":
+      case "date":
+      case "tel":
+      case "select":
+      case "radio":
+      case "checkbox":
+        return (
+          <tr key={item.name}>
+            <td>
+              <label>{item.label}:</label>
+            </td>
+            <td>
+              {item.type === "select" ? (
+                <select
+                  name={item.name}
+                  value={editUser[item.name]}
+                  onChange={handleInputChange}
+                  required={item.required}
+                  className={styles.input}
+                >
+                  {item.options.map((option) => (
+                    <option key={option.value} value={option.value}>
+                      {option.label}
+                    </option>
+                  ))}
+                </select>
+              ) : item.type === "radio" ? (
+                item.options.map((option) => (
+                  <div key={option.value}>
+                    <input
+                      type="radio"
+                      name={item.name}
+                      value={option.value}
+                      checked={editUser[item.name] === option.value}
+                      onChange={handleInputChange}
+                      required={item.required}
+                    />
+                    <label>{option.label}</label>
+                  </div>
+                ))
+              ) : item.type === "checkbox" ? (
+                <input
+                  type="checkbox"
+                  name={item.name}
+                  checked={editUser[item.name]}
+                  onChange={handleInputChange}
+                  required={item.required}
+                />
+              ) : item.type === "tel" ? (
+                <input
+                  type="number"
+                  name={item.name}
+                  value={editUser[item.name]}
+                  onChange={handleInputChange}
+                  required={item.required}
+                  className={styles.input}
+                />
+              ) : (
+                <input
+                  type={item.type}
+                  name={item.name}
+                  value={editUser[item.name]}
+                  onChange={handleInputChange}
+                  required={item.required}
+                  className={styles.input}
+                />
+              )}
+              {errors[item.name] && <span>{errors[item.name]}</span>}
+            </td>
+          </tr>
+        );
+
+      case "submit":
+        return (
+          <tr key={item.name}>
+            <td colSpan="2">
+              <button type="submit" key={item.name} className={styles.submit}>
+                {item.label}
+              </button>
+            </td>
+          </tr>
+        );
+
+      default:
+        return null;
+    }
+  };
 
   const handleInputChange = (event) => {
     const { name, value, type, checked } = event.target;
@@ -55,7 +146,7 @@ function UserProfile() {
   const handleDeleteUser = () => {
     dispatch(deleteUser(email))
       .then((response) => {
-        alert(response.message);
+        alert("Usuario eliminado con éxito!");
         navigate("/");
       })
       .catch((error) => {
@@ -81,110 +172,12 @@ function UserProfile() {
     }
   };
 
-  const generateTag = (item) => {
-    switch (item.type) {
-      case "text":
-      case "date":
-        return (
-          <div key={item.name}>
-            <label>{item.label}</label>
-            <input
-              type={item.type}
-              name={item.name}
-              value={editUser[item.name]}
-              onChange={handleInputChange}
-              required={item.required}
-            />
-            <br />
-            {errors[item.name] && <span>{errors[item.name]}</span>}
-          </div>
-        );
-      case "tel":
-        return (
-          <div key={item.name}>
-            <label>{item.label}</label>
-            <input
-              type="number"
-              name={item.name}
-              value={editUser[item.name]}
-              onChange={handleInputChange}
-              required={item.required}
-            />
-            <br />
-            {errors[item.name] && <span>{errors[item.name]}</span>}
-          </div>
-        );
-
-      case "select":
-        return (
-          <div key={item.name}>
-            <label>{item.label}</label>
-            <select
-              name={item.name}
-              value={editUser[item.name]}
-              onChange={handleInputChange}
-              required={item.required}
-            >
-              {item.options.map((option) => (
-                <option key={option.value} value={option.value}>
-                  {option.label}
-                </option>
-              ))}
-            </select>
-            <br />
-            {errors[item.name] && <span>{errors[item.name]}</span>}
-          </div>
-        );
-
-      case "radio":
-        return (
-          <div key={item.name}>
-            <label>{item.label}</label>
-            {item.options.map((option) => (
-              <div key={option.value}>
-                <input
-                  type="radio"
-                  name={item.name}
-                  value={option.value}
-                  checked={editUser[item.name] === option.value}
-                  onChange={handleInputChange}
-                  required={item.required}
-                />
-                <label>{option.label}</label>
-                <br />
-                {option.value === "advertisement" && errors[item.name] && (
-                  <span>{errors[item.name]}</span>
-                )}
-              </div>
-            ))}
-          </div>
-        );
-
-      case "checkbox":
-        return (
-          <div key={item.name}>
-            <input
-              type="checkbox"
-              name={item.name}
-              checked={editUser[item.name]}
-              onChange={handleInputChange}
-              required={item.required}
-            />
-            <label>{item.label}</label>
-          </div>
-        );
-
-      case "submit":
-        return (
-          <button type="submit" key={item.name} onClick={handleSubmit}>
-            Guardar
-          </button>
-        );
-
-      default:
-        return null;
-    }
-  };
+  const generateTableRow = (label, value) => (
+    <tr key={label}>
+      <td>{label}:</td>
+      <td>{value}</td>
+    </tr>
+  );
 
   // Objeto de traducción para el idioma preferido
   const languageTranslations = {
@@ -202,34 +195,59 @@ function UserProfile() {
   };
 
   return (
-    <div className="UserProfile">
-      <h2>Perfil de Usuario</h2>
-      <p>Nombre: {userData?.name}</p>
-      <p>Email: {userData?.email}</p>
-      <p>Teléfono: {userData?.phone}</p>
-      <p>
-        Fecha de inicio:{" "}
-        {userData?.dateStart !== null ? userData?.dateStart : "No especificado"}
-      </p>
-      <p>Lenguaje preferido: {languageTranslations[userData?.language]}</p>
-      <p>¿Cómo nos conociste?: {findUsTranslations[userData?.findUs]}</p>
-      <p>
-        ¿Deseas recibir nuestro boletín informativo?:
-        {userData?.newsletter ? " Sí" : " No"}
-      </p>
-      {!edit ? (
-        <button onClick={() => setEdit(true)}>Editar</button>
-      ) : (
-        <div>
-          <form onSubmit={handleSubmit}>
-            {items.items.map((item) => generateTag(item))}
-            <button type="button" onClick={() => setEdit(false)}>
-              Cancelar
-            </button>
-          </form>
-          <button onClick={handleDeleteUser}>Eliminar Usuario</button>
+    <div className={styles.UserProfile}>
+      <div className={styles.title}>
+        <h1>Perfil de Usuario</h1>
+      </div>
+      <div className={styles.UserProfileContainer}>
+        <div className={styles.UserData}>
+          <h2>Datos Actuales</h2>
+          <table>
+            <tbody>
+              {generateTableRow("Email", userData?.email)}
+              {generateTableRow("Nombre completo", userData?.name)}
+              {generateTableRow("Número de teléfono", userData?.phone)}
+              {generateTableRow(
+                "Fecha de inicio",
+                userData?.dateStart !== null
+                  ? userData?.dateStart
+                  : "No especificado"
+              )}
+              {generateTableRow(
+                "Idioma preferido",
+                languageTranslations[userData?.language]
+              )}
+              {generateTableRow(
+                "Nos conociste por",
+                findUsTranslations[userData?.findUs]
+              )}
+              {generateTableRow(
+                "¿Deseas recibir nuestro boletín informativo?",
+                userData?.newsletter ? "Sí" : "No"
+              )}
+            </tbody>
+          </table>
+          {!edit && (
+            <div className={styles.EditButton}>
+              <button onClick={() => setEdit(true)}>Editar</button>
+            </div>
+          )}
+          {edit && (
+            <div>
+              <button onClick={() => setEdit(false)}>Cancelar</button>
+              <button onClick={() => handleDeleteUser()} className={styles.delete}>Eliminar</button>
+            </div>
+          )}
         </div>
-      )}
+        {edit && (
+          <div className={styles.EditUserData}>
+            <h2>Editar Datos del Usuario</h2>
+            <form onSubmit={handleSubmit}>
+              {items.items.map((item) => generateTag(item))}
+            </form>
+          </div>
+        )}
+      </div>
     </div>
   );
 }

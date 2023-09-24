@@ -1,0 +1,36 @@
+/* UserList.module.css */
+
+/* UserList.module.css */
+
+.UserList {
+  text-align: center;
+}
+
+.title {
+  margin-bottom: 20px;
+}
+
+.UserListContainer {
+  display: flex;
+  justify-content: center;
+}
+
+.tableContainer {
+  width: 99.5%;
+  overflow-x: auto; /* Agrega una barra de desplazamiento horizontal si es necesario */
+}
+
+.userTable {
+  width: 100%;
+  margin: 0 auto; /* Agrega margen automático para centrar horizontalmente */
+  border-collapse: collapse;
+}
+
+.userTable th,
+.userTable td {
+  border: 1px solid black; /* Añade un borde de 1px sólido negro a las celdas */
+  padding: 8px; /* Agrega un espacio interno para el contenido */
+  text-align: center; /* Centra el texto en las celdas */
+  white-space: nowrap; /* Evita el ajuste de texto automático */
+
+}

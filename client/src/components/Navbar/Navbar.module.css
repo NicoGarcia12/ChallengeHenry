@@ -1,0 +1,38 @@
+/* En tu archivo CSS (puedes usar un archivo separado o estilos en línea) */
+.Navbar {
+    background-color: #ffee00; /* Fondo amarillo */
+    display: flex;
+    justify-content: space-between;
+    padding: 10px; /* Espacio interno para los elementos internos */
+    align-items: center; /* Centrar verticalmente los elementos */
+  }
+  
+  .Navbar div {
+    margin: 5px; /* Margen entre los div internos */
+    padding: 10px; /* Espacio interno para los div internos */
+  }
+  
+  .Navbar h1 {
+    margin: 0; /* Eliminar margen predeterminado */
+  }
+  
+  /* Estilos para los botones */
+  .Navbar button {
+    background-color: black; /* Fondo amarillo para los botones */
+    color: #ffee00; /* Texto negro para los botones */
+    padding: 10px 25px; /* Espacio interno para los botones */
+    border-radius: 20px;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 16px;
+    margin: 0 5px; /* Margen entre los botones */
+    transition: transform 0.2s ease; /* Agrega una transición suave */
+
+  }
+  
+  /* Estilos para los botones al hacer hover */
+  .Navbar button:hover {
+    transform: scale(1.10); /* Escala el botón al 105% del tamaño original al hacer hover */
+  }
+  

@@ -1,0 +1,25 @@
+/* En tu archivo CSS (puedes usar un archivo separado o estilos en línea) */
+.SearchBar {
+    margin-top: 20px; /* Espacio superior para separar de la NavBar */
+    display: flex;
+    align-items: center;
+  }
+  
+  .SearchBar span {
+    font-size: 18px; /* Tamaño de fuente para el span */
+    font-weight: bold;
+    margin-right: 10px; /* Margen derecho para separar del input */
+    color: black;
+  }
+  
+  .SearchBar input[type="email"] {
+    font-size: 16px; /* Tamaño de fuente para el input */
+    padding: 5px; /* Espacio interno para el input */
+    border: 2px solid #000; /* Borde del input */
+    border-radius: 10px; /* Borde redondeado */
+    background-color: #000;
+    color: #ffee00;
+  }
+  
+
+  

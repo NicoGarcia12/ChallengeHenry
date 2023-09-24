@@ -1,15 +1,17 @@
 import React, { useState } from "react";
-import "./Home.module.css";
+import styles from "./Home.module.css";
 import items from "../../utils/items.json";
 import validation from "../../utils/validation";
 import axios from "axios";
 import { url } from "../../redux/actions";
 import { useDispatch } from "react-redux";
 import { createUser } from "../../redux/actions";
+import { useNavigate } from "react-router-dom";
 axios.defaults.baseURL = url;
 
 function Home() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [newUser, setNewUser] = useState({
     email: "",
     full_name: "",
@@ -50,16 +52,7 @@ function Home() {
       dispatch(createUser(newUser))
         .then((response) => {
           alert(response.message);
-          // Restablece el estado del formulario a sus valores iniciales
-          setNewUser({
-            email: "",
-            full_name: "",
-            phone_number: "",
-            start_date: "",
-            preferred_language: "english",
-            how_found: "",
-            newsletter_subscription: false,
-          });
+          navigate(`/userprofile/${newUser.email}`);
         })
         .catch((error) => {
           alert("Hubo un error al crear el usuario, vuelva a intentar");
@@ -72,100 +65,85 @@ function Home() {
     switch (item.type) {
       case "text":
       case "date":
-        return (
-          <div key={item.name}>
-            <label>{item.label}</label>
-            <input
-              type={item.type}
-              name={item.name}
-              value={newUser[item.name]}
-              onChange={handleInputChange}
-              required={item.required}
-            />
-            <br />
-            {errors[item.name] && <span>{errors[item.name]}</span>}
-          </div>
-        );
       case "tel":
-        return (
-          <div key={item.name}>
-            <label>{item.label}</label>
-            <input
-              type="number"
-              name={item.name}
-              value={newUser[item.name]}
-              onChange={handleInputChange}
-              required={item.required}
-            />
-            <br />
-            {errors[item.name] && <span>{errors[item.name]}</span>}
-          </div>
-        );
-
       case "select":
-        return (
-          <div key={item.name}>
-            <label>{item.label}</label>
-            <select
-              name={item.name}
-              value={newUser[item.name]}
-              onChange={handleInputChange}
-              required={item.required}
-            >
-              {item.options.map((option) => (
-                <option key={option.value} value={option.value}>
-                  {option.label}
-                </option>
-              ))}
-            </select>
-            <br />
-            {errors[item.name] && <span>{errors[item.name]}</span>}
-          </div>
-        );
-
       case "radio":
+      case "checkbox":
         return (
-          <div key={item.name}>
-            <label>{item.label}</label>
-            {item.options.map((option) => (
-              <div key={option.value}>
-                <input
-                  type="radio"
+          <tr key={item.name}>
+            <td>
+              <label>{item.label}:</label>
+            </td>
+            <td>
+              {item.type === "select" ? (
+                <select
                   name={item.name}
-                  value={option.value}
-                  checked={newUser[item.name] === option.value}
+                  value={newUser[item.name]}
+                  onChange={handleInputChange}
+                  required={item.required}
+                  className={styles.input}
+                >
+                  {item.options.map((option) => (
+                    <option key={option.value} value={option.value}>
+                      {option.label}
+                    </option>
+                  ))}
+                </select>
+              ) : item.type === "radio" ? (
+                item.options.map((option) => (
+                  <div key={option.value}>
+                    <input
+                      type="radio"
+                      name={item.name}
+                      value={option.value}
+                      checked={newUser[item.name] === option.value}
+                      onChange={handleInputChange}
+                      required={item.required}
+                    />
+                    <label>{option.label}</label>
+                  </div>
+                ))
+              ) : item.type === "checkbox" ? (
+                <input
+                  type="checkbox"
+                  name={item.name}
+                  checked={newUser[item.name]}
                   onChange={handleInputChange}
                   required={item.required}
                 />
-                <label>{option.label}</label>
-                <br />
-                {option.value === "advertisement" && errors[item.name] && (
-                  <span>{errors[item.name]}</span>
-                )}
-              </div>
-            ))}
-          </div>
-        );
-
-      case "checkbox":
-        return (
-          <div key={item.name}>
-            <input
-              type="checkbox"
-              name={item.name}
-              checked={newUser[item.name]}
-              onChange={handleInputChange}
-              required={item.required}
-            />
-            <label>{item.label}</label>
-          </div>
+              ) : item.type === "tel" ? (
+                <input
+                  type="number"
+                  name={item.name}
+                  value={newUser[item.name]}
+                  onChange={handleInputChange}
+                  required={item.required}
+                  className={styles.input}
+                />
+              ) : (
+                <input
+                type={item.type}
+                name={item.name}
+                value={newUser[item.name]}
+                onChange={handleInputChange}
+                required={item.required}
+                className={styles.input}
+              />
+              )}
+              {errors[item.name] && <span>{errors[item.name]}</span>}
+            </td>
+          </tr>
         );
 
       case "submit":
         return (
-          <button type="submit" key={item.name}>
-            {item.label}
-          </button>
+          <tr key={item.name}>
+            <td colSpan="2">
+              <button type="submit" key={item.name} className={styles.submit}>
+                {item.label}
+              </button>
+            </td>
+          </tr>
         );
 
       default:
@@ -174,21 +152,30 @@ function Home() {
   };
 
   return (
-    <div className="Home">
+    <div className={styles.Home}>
+      <h1>Formulario de Usuario</h1>
       <form onSubmit={handleSubmit}>
-        <div key="email">
-          <label>Email:</label>
-          <input
-            type="email"
-            name="email"
-            value={newUser.email}
-            onChange={handleInputChange}
-            required={true}
-          />
-          <br />
-          {errors.email && <span>{errors.email}</span>}
-        </div>
-        {items.items.map((item) => generateTag(item))}
+        <table>
+          <tbody>
+            <tr key="email">
+              <td>
+                <label>Email:</label>
+              </td>
+              <td>
+                <input
+                  type="email"
+                  name="email"
+                  value={newUser.email}
+                  onChange={handleInputChange}
+                  required={true}
+                  className={styles.input}
+                />
+                {errors.email && <span>{errors.email}</span>}
+              </td>
+            </tr>
+            {items.items.map((item) => generateTag(item))}
+          </tbody>
+        </table>
       </form>
     </div>
   );

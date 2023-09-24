@@ -1,0 +1,60 @@
+.Home {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+  justify-content: center;
+}
+
+input[type="email"],
+input[type="text"],
+input[type="number"],
+select {
+  padding: 10px;
+  border: 2px solid black;
+  border-radius: 5px;
+  color: #000;
+  text-align: center;
+}
+
+input[type="checkbox"] {
+  margin-right: 5px;
+}
+
+table {
+  width: 100%;
+  max-width: 500px;
+  margin-top: 20px;
+  text-align: center;
+}
+
+tr td {
+  padding: 10px;
+  text-align: center;
+}
+
+button[type="submit"] {
+  background-color: black;
+  color: #ffee00;
+  font-size: 16px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px; /* Espacio superior */
+  transition: transform 0.2s ease; /* Agrega una transición suave */
+}
+
+button[type="submit"]:hover {
+  transform: scale(1.1);
+}
+
+/* Estilos para los mensajes de error */
+span {
+  color: red; /* Rojo */
+  font-size: 12px;
+  font-weight: bold; /* Texto en negrita */
+  display: block; /* Colocar en una nueva línea */
+  margin-top: 5px; /* Espacio superior */
+  text-align: center; /* Alinea el texto del mensaje de error a la izquierda */
+}

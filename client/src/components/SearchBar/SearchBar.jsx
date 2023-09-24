@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { searchUserByEmail } from "../../redux/actions"; // Importa la acción correspondiente
+import styles from "./SearchBar.module.css"
 
 function SearchBar() {
   const [email, setEmail] = useState("");
@@ -20,7 +21,8 @@ function SearchBar() {
   };
 
   return (
-    <div>
+    <div className={styles.SearchBar}>
+      <span>Buscar por correo electrónico:</span>
       <input
         type="email"
         placeholder="Buscar email"

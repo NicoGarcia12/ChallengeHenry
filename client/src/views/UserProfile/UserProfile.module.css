@@ -1,0 +1,101 @@
+.UserProfileContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  justify-content: center;
+  text-align: center;
+  padding: 20px;
+}
+
+.UserData {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+.UserData td {
+  white-space: nowrap; /* Evita el ajuste de texto automático */
+}
+
+.EditUserData {
+  padding: 20px;
+}
+
+.EditButton {
+  text-align: center;
+  margin-top: 20px;
+}
+
+h1 {
+  margin-bottom: 20px;
+}
+
+button {
+  background-color: black;
+  color: #ffee00;
+  font-size: 16px;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: transform 0.2s ease;
+}
+
+button:hover {
+  transform: scale(1.1);
+}
+
+input[type="checkbox"] {
+  margin-right: 5px;
+}
+
+input[type="email"],
+input[type="text"],
+input[type="number"],
+select {
+  padding: 10px;
+  border: 2px solid black;
+  border-radius: 5px;
+  color: #000;
+  text-align: center;
+}
+
+span.error {
+  color: red;
+  font-size: 12px;
+  font-weight: bold;
+  display: block;
+  margin-top: 5px;
+  text-align: center;
+}
+
+div.formField {
+  margin-bottom: 10px;
+}
+
+div.radioButton {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+button.submit {
+  background-color: black;
+  color: #ffee00;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 0 auto;
+  transition: transform 0.2s ease;
+}
+
+button.submit:hover {
+  transform: scale(1.1);
+}
+
+.delete {
+  margin-left: 10px;
+}
