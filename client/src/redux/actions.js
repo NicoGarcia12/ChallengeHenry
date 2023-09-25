@@ -1,5 +1,5 @@
 import axios from "axios";
-export const url = "http://localhost:3001"; // CAMBIAR EN GITHUB
+export const url = "http://localhost:3001"; // CAMBIAR EN GITHUB por https://challengehenry-production.up.railway.app
 export const GET_USERS = "GET_USERS";
 export const DELETE_USER = "DELETE_USER";
 axios.defaults.baseURL = url;
