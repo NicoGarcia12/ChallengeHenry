@@ -2,6 +2,8 @@ const {
   createUserController,
 } = require("../../controllers/usersControllers/createUserController");
 
+const { loginEmail } = require("../../utils/loginEmail");
+
 const createUserHandler = async (req, res) => {
   try {
     const {
@@ -17,12 +19,14 @@ const createUserHandler = async (req, res) => {
       userEmail: email,
       fullName: full_name,
       phoneNumber: phone_number,
-      startDate:start_date,
+      startDate: start_date,
       preferredLanguage: preferred_language,
       howFound: how_found,
       newsletterSubscription: newsletter_subscription,
     };
     const response = await createUserController(dataUser);
+
+    await loginEmail(dataUser);
 
     return res
       .status(200)
