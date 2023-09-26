@@ -1,7 +1,9 @@
 import axios from "axios";
-export const url = "https://challengehenry-production.up.railway.app"; // CAMBIAR EN GITHUB por https://challengehenry-production.up.railway.app
+export const url = "http://localhost:3001"; // CAMBIAR EN GITHUB por https://challengehenry-production.up.railway.app
 export const GET_USERS = "GET_USERS";
 export const DELETE_USER = "DELETE_USER";
+export const APPLY_FILTERS = 'APPLY_FILTERS';
+
 axios.defaults.baseURL = url;
 
 export const createUser = (newUser) => {
@@ -64,5 +66,12 @@ export const updateUser = (updatedData,email) => {
     } catch (error) {
       throw error;
     }
+  };
+};
+
+export const applyFilters = (filters) => {
+  return {
+    type: APPLY_FILTERS,
+    payload: filters,
   };
 };

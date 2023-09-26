@@ -2,11 +2,12 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getUsers, deleteUser } from "../../redux/actions";
 import { Link } from "react-router-dom";
-import styles from "./UserList.module.css"; // Importa el archivo de estilos
+import Filters from "../../components/Filters/Filters";
+import styles from "./UserList.module.css";
 
 function UserList() {
   const dispatch = useDispatch();
-  const users = useSelector((state) => state.users);
+  const filteredUsers = useSelector((state) => state.filteredUsers);
 
   useEffect(() => {
     dispatch(getUsers());
@@ -35,8 +36,9 @@ function UserList() {
       <div className={styles.title}>
         <h1>Lista de Usuarios</h1>
       </div>
+      <Filters />
       <div className={styles.UserListContainer}>
-        {users.length === 0 ? (
+        {filteredUsers.length === 0 ? (
           <p>No hay usuarios registrados</p>
         ) : (
           <div className={styles.tableContainer}>
@@ -54,7 +56,7 @@ function UserList() {
                 </tr>
               </thead>
               <tbody>
-                {users.map((user) => (
+                {filteredUsers.map((user) => (
                   <tr key={user.id}>
                     <td>{user.email}</td>
                     <td>{user.name}</td>

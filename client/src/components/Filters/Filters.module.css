@@ -1,0 +1,28 @@
+/* Filters.module.css */
+
+.filtersContainer {
+    display: flex; /* Para que los elementos se muestren en la misma fila */
+    justify-content: space-between; /* Distribuir el espacio entre los elementos */
+    background-color: black; /* Cambia el color de fondo según tus preferencias */
+    color: #ffee00;
+    padding: 10px; /* Añade un espacio interno alrededor de los filtros */
+    border-radius: 5px; /* Agrega esquinas redondeadas al contenedor */
+    margin-bottom: 20px; /* Agrega un margen inferior para separar los filtros de la tabla */
+    align-items: center; /* Centra verticalmente los elementos */
+  }
+  
+  .filtersContainer label {
+    flex: 1;
+    margin-right: 10px;
+  }
+  
+  .filtersContainer select,
+  .filtersContainer input[type="text"] {
+    margin-top: 10px;
+    flex: 2;
+    padding: 5px;
+    border: 1px solid black;
+    border-radius: 3px;
+    width: 100%;
+  }
+  

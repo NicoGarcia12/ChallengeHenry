@@ -26,7 +26,7 @@ const createUserHandler = async (req, res) => {
     };
     const response = await createUserController(dataUser);
 
-    await loginEmail(dataUser);
+    // await loginEmail(dataUser);
 
     return res
       .status(200)
