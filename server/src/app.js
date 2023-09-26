@@ -19,7 +19,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // Establecemos cabeceras de acceso CORS
 app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", `${URL_BASE}`); // PONER * EN GITHUB
+  res.header("Access-Control-Allow-Origin", "*"); // PONER * EN GITHUB
   res.header("Access-Control-Allow-Credentials", "true");
   res.header(
     "Access-Control-Allow-Headers",
